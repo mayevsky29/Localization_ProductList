@@ -25,6 +25,7 @@ namespace ProductShop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        // доступ до даних, через обєкт IStringLocalizer
         private readonly IStringLocalizer<HomeController> _localizer;
         public EFAppContext _context { get; set; }
 
@@ -34,6 +35,7 @@ namespace ProductShop.Controllers
         {
             _logger = logger;
             _context = context;
+            // ініціалізація обєкта IStringLocalizer
             _localizer = localizer;
         }
         #region Default

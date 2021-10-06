@@ -19,14 +19,14 @@ namespace ProductShop.ActionFilters
         public InternationalizationAttribute()
         {
 
-            // Get supported locales list
-            _supportedLocales = Utils.LocalizationHelper.GetSupportedLocales();
+            // отримання списку мов, які підтримуються
+            _supportedLocales = Utils.LocalizationHelper.GetLanguages().Select(x => x.locCode).ToList();
 
-            // Set default locale
+            // встановлення локала за замовчуванням
             _defaultLang = _supportedLocales[0];
         }
         /// <summary>
-        /// Apply locale to current thread
+        /// Застосування локалі до поточного потоку
         /// </summary>
         /// <param name="lang">locale name</param>
         private void SetLang(string lang)
@@ -34,12 +34,13 @@ namespace ProductShop.ActionFilters
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
         }
+        // метод відпрацьовує перед віиконанням екшена контролера
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            // Get locale from route values
+            // отримання локалі із значень маршруту
             string lang = (string)filterContext.RouteData.Values["lang"] ?? _defaultLang;
 
-            // If we haven't found appropriate culture - seet default locale then
+            // Якщо ми не знайшли відповідну культуру - тоді вибераєтьс локаль за замовчуванням
             if (!_supportedLocales.Contains(lang))
                 lang = _defaultLang;
 

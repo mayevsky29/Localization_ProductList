@@ -34,23 +34,27 @@ namespace ProductShop
         {
             services.AddLocalization(opts =>
             {
+                // шлях до ресурсів
                 opts.ResourcesPath = "Resources";
             });
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
+                // колекції мов, які підтримуються на даному сайті
                 var supportedCultures = new[]
                 {
                     new CultureInfo("uk"),
                     new CultureInfo("en"),
                 };
-
+                // встановлення мови за замовчуванням
                 options.DefaultRequestCulture = new RequestCulture("uk");
+                
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
 
             services.AddControllersWithViews()
+                // додавання на сайт служби для локалізації
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization(); 
 
@@ -72,7 +76,7 @@ namespace ProductShop
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            // отримання налаштувань для обєкта RequestLocalizationOptions
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
 
@@ -93,6 +97,7 @@ namespace ProductShop
 
             app.UseEndpoints(endpoints =>
             {
+                // налаштування маршруту для lang в адресній строці
                 endpoints.MapControllerRoute(
                     name: "defaultlocal",
                     pattern: "{lang=uk}/{controller=Home}/{action=Index}/{id?}");

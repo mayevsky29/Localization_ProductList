@@ -132,4 +132,16 @@
   <data name="Home" xml:space="preserve">
     <value>Головна сторінка</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Ім’я</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Фотографії</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Ціна</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Інструменти</value>
+  </data>
 </root>

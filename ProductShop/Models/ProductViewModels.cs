@@ -55,4 +55,9 @@ namespace ProductShop.Models
         public int Id { get; set; }
         public string Name { get; set; }
     }
+    public class LocalizationVM
+    {
+        public string locCode { get; set; }
+        public string locName { get; set; }
+    }
 }
